@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--
+      Indexing: this demo page is kept out of search engines on purpose.
+      To allow indexing later, change the content to "index, follow".
+      noindex is not access control: anyone with the URL can open this page.
+    -->
+    <meta name="robots" content="noindex, follow" />
+    <title>Babel Translator — Android app technical demo</title>
+    <meta
+      name="description"
+      content="Technical demonstration of Babel Translator, an Android app that translates text and speech between Spanish, English and Mandarin Chinese entirely on the device."
+    />
+    <meta name="theme-color" content="#060a2a" />
+    <link rel="icon" type="image/png" href="../assets/favicon.png" />
+    <link rel="stylesheet" href="../assets/styles.css" />
+    <link rel="stylesheet" href="demo.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap">
+        <span class="brand">
+          <img src="../assets/icon-192.png" alt="" width="36" height="36" />
+          Babel Translator
+        </span>
+        <nav class="site-nav" aria-label="Sections">
+          <a class="optional" href="#capabilities">Capabilities</a>
+          <a class="optional" href="#screenshots">Screenshots</a>
+          <a class="optional" href="#test">How to test</a>
+          <a href="#notes">Technical notes</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="wrap hero-grid">
+          <div>
+            <p class="eyebrow">Android application · technical demonstration</p>
+            <h1>Babel Translator <span>Offline speech &amp; text translation</span></h1>
+            <p class="lead">
+              An Android app that translates typed text and spoken conversations between Spanish, English and
+              Mandarin Chinese. Translation, speech recognition and speech synthesis all run on the device: after
+              the language models are downloaded once, the app works in airplane mode.
+            </p>
+            <div class="actions">
+              <a
+                class="button button-primary"
+                href="https://github.com/franbenaglia/babelTranslatorLanding/releases/download/v1.1.0/babel-translator-v1.1.0.apk"
+                type="application/vnd.android.package-archive"
+                download
+                >Download Android APK</a
+              >
+            </div>
+            <p class="fine">Version 1.1.0 · 49.8 MB · Android 7.0 or later · No account required</p>
+          </div>
+          <figure class="hero-shot">
+            <img
+              src="img/translator.jpg"
+              width="360"
+              height="724"
+              alt="Translator screen: a Spanish sentence typed in the text box and its English translation below"
+            />
+          </figure>
+        </div>
+      </section>
+
+      <section id="capabilities">
+        <div class="wrap">
+          <h2>Technical capabilities</h2>
+          <p class="section-lead">What this project demonstrates, as implemented in the shipped version.</p>
+          <ul class="cards">
+            <li class="card">
+              <h3>On-device machine translation</h3>
+              <p>
+                Google ML Kit on-device translation between three languages in all six directions, with no
+                translation API, server or key. Multi-line text is translated line by line to keep its structure.
+              </p>
+            </li>
+            <li class="card">
+              <h3>Offline speech recognition</h3>
+              <p>
+                Vosk speech-to-text running on the phone with live partial results, a pause-tolerant dictation
+                mode and a continuous mode for conversations. Audio is processed in memory and never stored.
+              </p>
+            </li>
+            <li class="card">
+              <h3>Two-person conversation mode</h3>
+              <p>
+                Each speaker taps their language once and keeps talking; every sentence is recognized, translated
+                and read aloud. The microphone pauses during playback so the phone does not transcribe itself.
+              </p>
+            </li>
+            <li class="card">
+              <h3>Downloadable model manager</h3>
+              <p>
+                Resumable HTTPS downloads with progress, exact-size validation, ZIP extraction that rejects paths
+                outside the target folder, and a model is marked installed only after the whole process succeeds.
+              </p>
+            </li>
+            <li class="card">
+              <h3>Native Android integration</h3>
+              <p>
+                Three Kotlin Capacitor plugins wrap ML Kit, Vosk and the Android TextToSpeech engine behind
+                TypeScript service interfaces, so each engine can be replaced without touching the UI.
+              </p>
+            </li>
+            <li class="card">
+              <h3>Local-first data</h3>
+              <p>
+                History and favorites are stored on the device and excluded from Android backup. The interface
+                switches between English and Spanish following the phone's language.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="screenshots">
+        <div class="wrap">
+          <h2>Screenshots</h2>
+          <p class="section-lead">Captured from the app running on an Android 15 phone. Tap an image to enlarge it.</p>
+          <ul class="gallery">
+            <li>
+              <figure>
+                <a href="img/translator-large.jpg" class="shot">
+                  <img
+                    src="img/translator.jpg"
+                    width="360"
+                    height="724"
+                    loading="lazy"
+                    alt="Translator screen with a Spanish sentence and its English translation"
+                  />
+                </a>
+                <figcaption>Text translation, Spanish → English</figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure>
+                <a href="img/conversation-large.jpg" class="shot">
+                  <img
+                    src="img/conversation.jpg"
+                    width="360"
+                    height="724"
+                    loading="lazy"
+                    alt="Conversation screen showing a recognized Spanish phrase and its English translation"
+                  />
+                </a>
+                <figcaption>Conversation mode: recognized speech and its translation</figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure>
+                <a href="img/languages-large.jpg" class="shot">
+                  <img
+                    src="img/languages.jpg"
+                    width="360"
+                    height="724"
+                    loading="lazy"
+                    alt="Offline languages screen listing translation model, speech model and system voice status for each language"
+                  />
+                </a>
+                <figcaption>Offline languages: model and voice status per language</figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure>
+                <a href="img/history-large.jpg" class="shot">
+                  <img
+                    src="img/history.jpg"
+                    width="360"
+                    height="724"
+                    loading="lazy"
+                    alt="History screen with saved translations and actions to listen, favorite, reuse, copy and share"
+                  />
+                </a>
+                <figcaption>Local history and favorites</figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure>
+                <a href="img/settings-large.jpg" class="shot">
+                  <img
+                    src="img/settings.jpg"
+                    width="360"
+                    height="724"
+                    loading="lazy"
+                    alt="Settings screen with automatic translation, voice speed and pitch, and download options"
+                  />
+                </a>
+                <figcaption>Settings: voice speed and pitch, Wi-Fi-only downloads</figcaption>
+              </figure>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="test">
+        <div class="wrap">
+          <h2>How to test the application</h2>
+          <p class="section-lead">
+            The app is distributed as an APK file for evaluation. Android asks for confirmation before installing
+            apps from outside an app store; this is a normal step and no security setting needs to be turned off.
+          </p>
+          <ol class="steps">
+            <li>
+              <strong>Download the APK</strong>
+              <span>On an Android phone, tap <em>Download Android APK</em> above (49.8 MB).</span>
+            </li>
+            <li>
+              <strong>Install it</strong>
+              <span>
+                Open the downloaded file. Android may ask you to allow your browser or file manager to install
+                apps; follow its prompts.
+              </span>
+            </li>
+            <li>
+              <strong>Prepare the languages</strong>
+              <span>
+                On first launch, choose at least two languages and download their models (about 70 MB each). This
+                is the only step that needs Internet.
+              </span>
+            </li>
+          </ol>
+
+          <h3 class="sub">Suggested demonstration</h3>
+          <ol class="demo-steps">
+            <li>Complete the initial setup with Spanish and English and wait for “Ready to use offline”.</li>
+            <li>Turn on airplane mode.</li>
+            <li>On <em>Translate</em>, type a sentence and tap <em>Listen</em> on the translation.</li>
+            <li>Tap <em>Dictate</em>, say a sentence, and check the recognized text before translating it.</li>
+            <li>
+              Open <em>Conversation</em>, tap <em>Speak in English</em>, say two or three sentences with short
+              pauses and listen to each translation. Then tap <em>Hablar en español</em> to answer.
+            </li>
+            <li>Open <em>History</em> to see the saved turns.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="architecture">
+        <div class="wrap">
+          <h2>Technical architecture</h2>
+          <p class="section-lead">
+            A React and Ionic interface running in Capacitor, with the heavy work done in native Kotlin code.
+          </p>
+          <div class="flow" role="img" aria-label="Voice translation pipeline: microphone to Vosk speech recognition, to ML Kit translation, to Android text-to-speech, all on the device">
+            <span class="node">Microphone<small>16 kHz audio, in memory</small></span>
+            <span class="arrow" aria-hidden="true">→</span>
+            <span class="node">Vosk<small>speech recognition</small></span>
+            <span class="arrow" aria-hidden="true">→</span>
+            <span class="node">ML Kit<small>on-device translation</small></span>
+            <span class="arrow" aria-hidden="true">→</span>
+            <span class="node">Android TTS<small>speech synthesis</small></span>
+          </div>
+          <dl class="facts">
+            <dt>Interface</dt>
+            <dd>React 19, TypeScript, Ionic 9, running inside Capacitor 8.</dd>
+            <dt>Service layer</dt>
+            <dd>
+              TypeScript interfaces for translation, speech recognition, speech synthesis and model management.
+              Screens never call native code directly.
+            </dd>
+            <dt>Native layer</dt>
+            <dd>Three Kotlin Capacitor plugins: ML Kit Translate 17.0.3, Vosk Android 0.3.75, Android TextToSpeech.</dd>
+            <dt>Models</dt>
+            <dd>
+              ML Kit translation models (downloaded by ML Kit, English built in) and Vosk “small” models for
+              Spanish, English and Chinese (Apache 2.0), downloaded on demand into private app storage.
+            </dd>
+            <dt>Storage</dt>
+            <dd>History, favorites and settings in local app storage; no backend and no account.</dd>
+            <dt>Testing</dt>
+            <dd>50 TypeScript unit tests and 8 JVM tests for the model installer, plus manual tests on a phone.</dd>
+          </dl>
+        </div>
+      </section>
+
+      <section id="notes">
+        <div class="wrap">
+          <h2>Technical notes</h2>
+          <dl class="facts">
+            <dt>Version</dt>
+            <dd>1.1.0 (version code 2)</dd>
+            <dt>Package</dt>
+            <dd><code>com.traductor.offline</code></dd>
+            <dt>Android</dt>
+            <dd>7.0 (API 24) or later; targets API 36.</dd>
+            <dt>CPU</dt>
+            <dd>ARM devices (arm64-v8a, armeabi-v7a). x86 emulators are not supported by this build.</dd>
+            <dt>Internet</dt>
+            <dd>
+              Only to download the language models. Translating, dictating and conversation work offline. When
+              online, Google ML Kit sends Google technical usage and diagnostic data (not the translated text).
+            </dd>
+            <dt>Hardware</dt>
+            <dd>A microphone for dictation and conversation; no other hardware.</dd>
+            <dt>Permissions</dt>
+            <dd>Microphone (requested on first voice use), Internet and network state.</dd>
+            <dt>Voices</dt>
+            <dd>Read-aloud uses the voices installed in the phone's text-to-speech engine.</dd>
+            <dt>APK size</dt>
+            <dd>52,243,419 bytes (49.8 MB)</dd>
+            <dt>SHA-256</dt>
+            <dd><code>7e4645dc6a50a0f4f8e166af3c4177c906a319ebb34969d5645a8de49d900f87</code></dd>
+            <dt>Signing certificate</dt>
+            <dd>
+              <code>05:92:BA:70:3E:EF:13:CA:AE:3B:A9:BA:B7:C7:F2:2F:F8:D9:B6:D0:14:6E:6F:D9:08:EC:A7:36:60:30:32:1E</code>
+            </dd>
+          </dl>
+          <p class="note">
+            Provided for technical evaluation. The APK is signed by the developer and has not been independently
+            security-audited. Translation and speech recognition are automatic and can make mistakes, especially
+            with background noise, proper names or long sentences; small offline models trade some accuracy for
+            size. The app is not distributed through an app store and does not update itself.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <span>Babel Translator · technical demonstration</span>
+        <span>Translation powered by Google ML Kit. Speech recognition by Vosk.</span>
+      </div>
+    </footer>
+
+    <dialog id="lightbox" aria-label="Enlarged screenshot">
+      <form method="dialog">
+        <button class="lightbox-close" aria-label="Close">×</button>
+      </form>
+      <img alt="" />
+      <p class="lightbox-caption"></p>
+    </dialog>
+
+    <script>
+      // Lightbox: opens screenshots in a native <dialog>. Without JavaScript the links open the image directly.
+      (function () {
+        var dialog = document.getElementById('lightbox');
+        if (!dialog || typeof dialog.showModal !== 'function') return;
+        var image = dialog.querySelector('img');
+        var caption = dialog.querySelector('.lightbox-caption');
+        document.querySelectorAll('a.shot').forEach(function (link) {
+          link.addEventListener('click', function (event) {
+            event.preventDefault();
+            var thumb = link.querySelector('img');
+            var figcaption = link.closest('figure').querySelector('figcaption');
+            image.src = link.getAttribute('href');
+            image.alt = thumb.alt;
+            caption.textContent = figcaption ? figcaption.textContent : '';
+            dialog.showModal();
+          });
+        });
+        dialog.addEventListener('click', function (event) {
+          if (event.target === dialog) dialog.close();
+        });
+      })();
+    </script>
+  </body>
+</html>
